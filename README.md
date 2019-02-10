@@ -2,7 +2,7 @@
 
 Simple loot tracker for Sea of Thieves
 
-https://sot-loop.firebaseapp.com
+sot-loot (dot) firebaseapp.com
 
 ## Features
 - Add and search through (most) of the list of loots in Sea of Thieves
