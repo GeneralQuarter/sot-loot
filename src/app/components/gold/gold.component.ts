@@ -12,6 +12,10 @@ export class GoldComponent implements OnInit {
 
   @Input()
   set amount(value: number | number[] | null) {
+    this.low = null;
+    this.high = null;
+    this.value = null;
+
     if (Array.isArray(value)) {
       if (value[1] && value[0] !== value[1]) {
         this.low = value[0];
