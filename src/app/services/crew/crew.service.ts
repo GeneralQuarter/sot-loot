@@ -24,11 +24,11 @@ export class CrewService {
       return defaultCrew;
     }
 
-    return await this.getCrew(this.afAuth.auth.currentUser.uid) || defaultCrew;
+    return await this.getCrew(profile.crew) || defaultCrew;
   }
 
-  async getCrew(userId: string): Promise<Crew | null> {
-    const crewDoc = await this.afs.doc('crew/' + userId).get().toPromise();
+  async getCrew(crewId: string): Promise<Crew | null> {
+    const crewDoc = await this.afs.doc('crew/' + crewId).get().toPromise();
 
     if (!crewDoc.exists) {
       return null;
