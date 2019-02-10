@@ -14,8 +14,8 @@
       <ion-label position="stacked">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
       <ion-input type="password" [(ngModel)]="credentials.password"></ion-input>
     </ion-item>
-    <ion-item *ngIf="error" lines="none">
-      <ion-label text-wrap><ion-text color="danger">{{ error }}</ion-text></ion-label>
+    <ion-item *ngIf="error" lines="none" text-wrap>
+      <ion-label><ion-text color="danger">{{ error }}</ion-text></ion-label>
     </ion-item>
     <ion-button (click)="login()" expand="block">{{ 'ACTIONS.LOGIN' | translate }}</ion-button>
   </ion-list>
