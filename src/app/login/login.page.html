@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ 'TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item>
+      <ion-label position="stacked">{{ 'LOGIN.EMAIL' | translate }}</ion-label>
+      <ion-input type="email" [(ngModel)]="credentials.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">{{ 'LOGIN.PASSWORD' | translate }}</ion-label>
+      <ion-input type="password" [(ngModel)]="credentials.password"></ion-input>
+    </ion-item>
+    <ion-item *ngIf="error" lines="none">
+      <ion-label text-wrap><ion-text color="danger">{{ error }}</ion-text></ion-label>
+    </ion-item>
+    <ion-button (click)="login()" expand="block">{{ 'ACTIONS.LOGIN' | translate }}</ion-button>
+  </ion-list>
+</ion-content>

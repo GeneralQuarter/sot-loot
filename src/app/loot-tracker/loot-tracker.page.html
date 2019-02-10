@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{ 'LOOT_TRACKER.TITLE' | translate }}
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-searchbar (keyup)="searchTerm$.next($event.target.value)"
+                   (ionClear)="searchTerm$.next('')"
+                   [placeholder]="'ACTIONS.SEARCH' | translate"
+                   [cancelButtonText]="'ACTIONS.CANCEL' | translate"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [scrollY]="false">
+  <ion-list no-padding>
+    <ng-container *ngIf="filteredLoots$ | async as loots; else loadingLoots">
+      <ion-item *ngFor="let loot of loots; trackBy: trackByLootId"
+                (click)="selectedLootHistoryId ? updateSelectedLootHistoryLoot(loot) : addLootHistoryWithoutPrice(loot)">
+        <ion-label>
+          <h2>{{ 'LOOT.' + loot.name | translate }}</h2>
+          <p><app-gold [amount]="[loot.low, loot.high]"></app-gold></p>
+        </ion-label>
+      </ion-item>
+    </ng-container>
+    <ng-template #loadingLoots>
+      <ion-item lines="none">
+        <ion-spinner slot="start"></ion-spinner>
+        <ion-label>{{ 'ACTIONS.LOADING' | translate }}</ion-label>
+      </ion-item>
+    </ng-template>
+  </ion-list>
+  <div>
+    <ion-list no-padding no-margin>
+      <ion-item-divider color="dark">
+        <ion-label>{{ 'LOOT_TRACKER.HISTORY' | translate }}</ion-label>
+        <h2 slot="end" *ngIf="lootHistorySum$ | async as lootHistorySum"><app-gold [amount]="lootHistorySum"></app-gold></h2>
+      </ion-item-divider>
+      <ion-item>
+        <ion-input type="number"
+                   #priceBurst
+                   (keyup.enter)="addLootHistoryWithoutLoot(priceBurst.value); priceBurst.value = ''"
+                   [placeholder]="'LOOT_TRACKER.PRICES_BURST' | translate"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list no-padding no-margin #looHistoryList>
+      <ng-container *ngIf="lootHistory$ | async as lootHistories">
+        <ion-item-sliding *ngFor="let lootHistory of lootHistories; trackBy: trackByLootHistoryId">
+          <ion-item (click)="clickOnLootHistory(lootHistory)" [color]="lootHistory.id === selectedLootHistoryId ? 'primary' : ''">
+            <ng-container *ngIf="lootService.indexedLoots[lootHistory.loot] as loot; else noLoot">
+              <ion-label>
+                <h2>{{ 'LOOT.' + loot.name | translate }}</h2>
+                <p>{{ lootHistory.date | date:'hh:mm - dd/MM' }}</p>
+              </ion-label>
+              <span slot="end"><app-gold [amount]="lootHistory.price"></app-gold></span>
+            </ng-container>
+            <ng-template #noLoot>
+              <ion-label>
+                <h2>???</h2>
+                <p>{{ lootHistory.date | date:'hh:mm - dd/MM' }}</p>
+              </ion-label>
+              <span slot="end"><app-gold [amount]="lootHistory.price"></app-gold></span>
+            </ng-template>
+          </ion-item>
+          <ion-item-options side="end">
+            <ion-item-option (click)="deleteLootHistory(lootHistory); looHistoryList.closeSlidingItems()" color="danger">
+              <ion-icon slot="icon-only" name="trash"></ion-icon>
+            </ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ng-container>
+    </ion-list>
+  </div>
+</ion-content>

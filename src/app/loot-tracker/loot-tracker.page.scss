@@ -1,0 +1,28 @@
+ion-content {
+    ion-list {
+        overflow: auto;
+    }
+
+    > ion-list {
+        margin-bottom: 0;
+        height: 30%;
+    }
+
+    > div {
+        position: relative;
+        height: 70%;
+
+        > ion-list:nth-child(2) {
+            height: calc(100% - 88px);
+        }
+    }
+
+    ion-item-divider {
+        height: 45px;
+
+        h2 {
+            margin-top: 10px;
+            margin-right: 15px;
+        }
+    }
+}

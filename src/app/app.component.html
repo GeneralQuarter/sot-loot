@@ -1,0 +1,36 @@
+<ion-app>
+  <ion-split-pane [when]="false">
+    <ion-menu>
+      <ion-header>
+        <ion-toolbar color="secondary">
+          <ion-title>SOT - Loot</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item>
+              <ion-label>
+                {{ 'MENU.LOGGED_IN_AS' | translate:{email: user?.email} }}
+              </ion-label>
+            </ion-item>
+            <ion-item (click)="afAuth.auth.signOut()" detail>
+              <ion-label>{{ 'ACTIONS.LOGOUT' | translate }}</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-segment (ionChange)="updateLang($event)">
+                <ion-segment-button value="en">
+                  en
+                </ion-segment-button>
+                <ion-segment-button value="fr">
+                  fr
+                </ion-segment-button>
+              </ion-segment>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
+    <ion-router-outlet main></ion-router-outlet>
+  </ion-split-pane>
+</ion-app>
