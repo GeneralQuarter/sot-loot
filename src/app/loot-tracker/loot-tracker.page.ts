@@ -140,6 +140,14 @@ export class LootTrackerPage implements OnInit {
     }
   }
 
+  async toggleSoldByAlliance(lootHistory: LootHistory) {
+    try {
+      await this.lootHistoryService.toggleSoldByAlliance(lootHistory);
+    } catch (e) {
+      this.showLootHistoryError('UPDATE');
+    }
+  }
+
   clickOnLootHistory(lootHistory: LootHistory) {
     if (!lootHistory.loot) {
       this.selectedLootHistoryId = lootHistory.id;
@@ -161,5 +169,9 @@ export class LootTrackerPage implements OnInit {
       duration: 2000
     });
     await toast.present();
+  }
+
+  test() {
+    console.log('clicked flag');
   }
 }

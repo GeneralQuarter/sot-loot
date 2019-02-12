@@ -62,6 +62,11 @@ export class LootHistoryService {
     return lootHistoryRef.update({price: price});
   }
 
+  toggleSoldByAlliance(lootHistory: LootHistory): Promise<void> {
+    const lootHistoryRef = this.lootHistoryCollection.doc(lootHistory.id);
+    return lootHistoryRef.update({soldByAlliance: !lootHistory.soldByAlliance});
+  }
+
   addWithoutPrice(lootId: string) {
     return this.add({loot: lootId});
   }

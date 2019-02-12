@@ -64,6 +64,9 @@
               </ion-label>
               <span slot="end"><app-gold [amount]="lootHistory.price"></app-gold></span>
             </ng-template>
+            <ion-button slot="end" fill="clear" [color]="lootHistory.soldByAlliance ? 'secondary' : 'medium'" (click)="toggleSoldByAlliance(lootHistory); $event.stopPropagation()">
+              <ion-icon slot="icon-only" name="flag"></ion-icon>
+            </ion-button>
           </ion-item>
           <ion-item-options side="end">
             <ion-item-option (click)="deleteLootHistory(lootHistory); looHistoryList.closeSlidingItems()" color="danger">
