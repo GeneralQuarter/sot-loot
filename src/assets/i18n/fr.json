@@ -1,5 +1,6 @@
 {
   "TITLE": "Sea Of Thieves - Loot",
+  "NEW_VERSION_AVAILABLE": "Une nouvelle version de l'application est disponible, téléchargement en cours...",
   "MENU": {
     "TITLE": "SOT - Loot",
     "LOGGED_IN_AS": "Connecté en tant que {{email}}"

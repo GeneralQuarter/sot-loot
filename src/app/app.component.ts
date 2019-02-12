@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { User } from 'firebase';
 import { TranslateService } from '@ngx-translate/core';
+import { UpdatePromptService } from './services/update-prompt/update-prompt.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ export class AppComponent {
     public afAuth: AngularFireAuth,
     private navCtrl: NavController,
     private translate: TranslateService,
+    private updatePromptService: UpdatePromptService,
   ) {
     this.initializeApp();
   }
@@ -42,6 +44,8 @@ export class AppComponent {
         this.navCtrl.navigateRoot('/login');
       }
     });
+
+    this.updatePromptService.listenForUpdates();
   }
 
   updateLang(event) {
