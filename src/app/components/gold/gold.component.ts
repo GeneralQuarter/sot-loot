@@ -28,8 +28,39 @@ export class GoldComponent implements OnInit {
     }
   }
 
+  @Input() range: {low: number, high: number, divideByTwo: boolean};
+
   constructor() { }
 
   ngOnInit() {}
+
+  get color() {
+    if (!this.value) {
+      return '';
+    }
+
+    if (!this.range) {
+      return '';
+    }
+
+    const high = this.range.divideByTwo ? this.range.high / 2 : this.range.high;
+    const low = this.range.divideByTwo ? this.range.low / 2 : this.range.low;
+
+    const diff = high - low;
+
+    if (diff < 5) {
+      return '';
+    }
+
+    const fraction = diff / 4;
+
+    if (this.value > high - fraction) {
+      return 'secondary';
+    }
+
+    if (this.value < low + fraction) {
+      return 'danger';
+    }
+  }
 
 }

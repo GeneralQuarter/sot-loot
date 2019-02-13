@@ -55,7 +55,8 @@
                 <h2>{{ 'LOOT.' + loot.name | translate }}</h2>
                 <p>{{ lootHistory.date | date:'hh:mm - dd/MM' }}</p>
               </ion-label>
-              <span slot="end"><app-gold [amount]="lootHistory.price"></app-gold></span>
+              <span slot="end"><app-gold [amount]="lootHistory.price"
+                                         [range]="{high: loot.high, low: loot.low, divideByTwo: lootHistory.soldByAlliance}"></app-gold></span>
             </ng-container>
             <ng-template #noLoot>
               <ion-label>
