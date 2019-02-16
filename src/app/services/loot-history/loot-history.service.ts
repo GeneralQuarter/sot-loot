@@ -5,7 +5,7 @@ import { LootHistory } from '../../models/loot-history';
 import { Observable } from 'rxjs';
 import { subHours } from 'date-fns';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { CrewService } from '../crew/crew.service';
 
 @Injectable({
@@ -35,6 +35,12 @@ export class LootHistoryService {
 
   getLootHistory$(): Observable<LootHistory[]> {
     return this.firestoreService.getSnapshotChanges<LootHistory>(this.lootHistoryCollection);
+  }
+
+  getAllLootHistoryOnce(): Promise<LootHistory[]> {
+    return this.firestoreService.getValueChanges(this.afs.collection<LootHistory>('loot-history')).pipe(
+      take(1)
+    ).toPromise();
   }
 
   getLootHistorySum$(lootHistory$: Observable<LootHistory[]>): Observable<number> {

@@ -27,4 +27,16 @@ export class FirestoreService {
       }))
     );
   }
+
+  getValueChanges<T>(collection: AngularFirestoreCollection<T>): Observable<T[]> {
+    return this.afAuth.authState.pipe(
+      switchMap(authState => {
+        if (!authState) {
+          return of();
+        }
+
+        return collection.valueChanges();
+      })
+    );
+  }
 }

@@ -1,4 +1,4 @@
-<span *ngIf="low">{{ low }} - {{ high }}</span>
-<ion-text *ngIf="value" [color]="color">{{ value }}</ion-text>
+<span *ngIf="low">{{ low | number:_digitsInfo:_lang }} - {{ high | number:_digitsInfo:_lang  }}</span>
+<ion-text *ngIf="value" [color]="color">{{ value | number:_digitsInfo:_lang  }}</ion-text>
 <span *ngIf="!value && !low">???</span>
 <ion-icon src="/assets/gold_icon.svg"></ion-icon>

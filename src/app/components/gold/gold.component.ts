@@ -1,11 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-gold',
   templateUrl: './gold.component.html',
   styleUrls: ['./gold.component.scss']
 })
-export class GoldComponent implements OnInit {
+export class GoldComponent implements OnInit, OnDestroy {
+  _digitsInfo = '1.0-2';
+  _lang = 'en-US';
+
   low: number;
   high: number;
   value: number;
@@ -30,9 +35,22 @@ export class GoldComponent implements OnInit {
 
   @Input() range: {low: number, high: number, divideByTwo: boolean};
 
-  constructor() { }
+  private _sub: Subscription;
 
-  ngOnInit() {}
+  constructor(public translateService: TranslateService) { }
+
+  ngOnInit() {
+    this._lang = this.translateService.getBrowserLang();
+    this._sub = this.translateService.onLangChange.subscribe(t => {
+      this._lang = t.lang;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this._sub) {
+      this._sub.unsubscribe();
+    }
+  }
 
   get color() {
     if (!this.value) {

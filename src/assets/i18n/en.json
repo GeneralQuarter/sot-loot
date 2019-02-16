@@ -18,6 +18,18 @@
       "LOOT_HISTORY": "Can't {{action}} this loot history. Try again later..."
     }
   },
+  "STATS": {
+    "TITLE": "Stats",
+    "GENERAL": {
+      "TITLE": "General",
+      "NUMBER_OF_LOOT": "Number of loot",
+      "ACCUMULATED_AMOUNT": "Accumulated Amount",
+      "BEST_LOOT_SOLD": "Best loot sold"
+    },
+    "SOLD_COUNT": {
+      "TITLE": "Sold Count"
+    }
+  },
   "LOGIN": {
     "EMAIL": "Email",
     "PASSWORD": "Password"

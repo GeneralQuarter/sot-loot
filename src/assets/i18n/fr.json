@@ -18,6 +18,18 @@
       "LOOT_HISTORY": "Impossible {{action}} ce loot à l'historique. Essayez plus tard..."
     }
   },
+  "STATS": {
+    "TITLE": "Statistiques",
+    "GENERAL": {
+      "TITLE": "Général",
+      "NUMBER_OF_LOOT": "Nombre de loot",
+      "ACCUMULATED_AMOUNT": "Somme accumulée",
+      "BEST_LOOT_SOLD": "Meilleur loot vendu"
+    },
+    "SOLD_COUNT": {
+      "TITLE": "Nombre de Ventes"
+    }
+  },
   "LOGIN": {
     "EMAIL": "Email",
     "PASSWORD": "Mot de Passe"
